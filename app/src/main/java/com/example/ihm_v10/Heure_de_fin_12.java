@@ -4,10 +4,12 @@ public class Heure_de_fin_12 {
 
     private int Heure_de_fin_12;
     private String Minute_de_fin_12;
+    private String Format;
 
-    public Heure_de_fin_12(int heure_de_fin_12, String minute_de_fin_12) {
+    public Heure_de_fin_12(int heure_de_fin_12, String minute_de_fin_12, String Format) {
         Heure_de_fin_12 = heure_de_fin_12;
         Minute_de_fin_12 = minute_de_fin_12;
+        Format = Format;
     }
 
     public int getHeure_de_fin_12() {
