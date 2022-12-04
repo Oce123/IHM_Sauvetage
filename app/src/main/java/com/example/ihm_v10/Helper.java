@@ -14,17 +14,20 @@ public class Helper extends SQLiteOpenHelper {
         super(context, "salle_libre", null, 1);
     }
 
+    //création de la base de donnée
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE salle_disponible(_id INTEGER PRIMARY KEY, numero TEXT,heure REAL, heure2 REAL)");
     }
 
+    //permet de mettre a jour la base de donnée en cas de changement
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS salle_disponible");
         onCreate(db);
     }
 
+    //insertion de nos données dans la base de données
     public void insertSalle(Salle_disponible s) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
