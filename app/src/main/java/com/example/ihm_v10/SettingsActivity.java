@@ -16,6 +16,12 @@ public class SettingsActivity extends AppCompatActivity {
     SwitchCompat Sw3D;
     SwitchCompat SwSalle;
 
+    public static boolean varHeure;
+
+    public static boolean getVarHeure() {
+        return varHeure;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("12h24",true); // On mets true à l'étiquette value du groupe save
                     editor.apply();
+                    varHeure=true;
                     Sw24h.setChecked(true);
                 }
                 else
@@ -50,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("12h24",false); // On mets false à l'étiquette value du groupe save
                     editor.apply();
+                    varHeure=false;
                     Sw24h.setChecked(false);
                 }
             }

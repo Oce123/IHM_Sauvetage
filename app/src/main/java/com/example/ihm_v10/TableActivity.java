@@ -1,7 +1,10 @@
 package com.example.ihm_v10;
 
+import static com.example.ihm_v10.SettingsActivity.getVarHeure;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.security.keystore.StrongBoxUnavailableException;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -16,74 +19,144 @@ public class TableActivity extends AppCompatActivity {
     private Spinner spinnerHeure;
     private Spinner spinnerHeure_de_fin;
 
+    boolean FormatHeure;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
 
-        this.spinnerHeure = (Spinner) findViewById(R.id.heure_de_debut);
-        Heure[] heure = HeureDataUtils.getHeure();
+        FormatHeure = getVarHeure();
 
-        ArrayAdapter<Heure> adapter = new ArrayAdapter<Heure>(this,
-                android.R.layout.simple_spinner_item,
-                heure);
+        if(FormatHeure == true)
+        {
+            this.spinnerHeure = (Spinner) findViewById(R.id.heure_de_debut);
+            Heure[] heure = HeureDataUtils.getHeure();
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<Heure> adapter = new ArrayAdapter<Heure>(this,android.R.layout.simple_spinner_item,heure);
 
-        this.spinnerHeure.setAdapter(adapter);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        this.spinnerHeure.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            this.spinnerHeure.setAdapter(adapter);
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                onItemSelectedHandler(parent, view, position, id);
-            }
+            this.spinnerHeure.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    onItemSelectedHandler(parent, view, position, id);
+                }
 
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-        this.spinnerHeure_de_fin = (Spinner) findViewById(R.id.heure_de_fin);
-        Heure_de_fin[] heure_de_fins = HeureDataUtils.getHeure_de_fin();
+                }
+            });
 
-        ArrayAdapter<Heure_de_fin> adapter2 = new ArrayAdapter<Heure_de_fin>(this,
-                android.R.layout.simple_spinner_item,
-                heure_de_fins);
+            this.spinnerHeure_de_fin = (Spinner) findViewById(R.id.heure_de_fin);
+            Heure_de_fin[] heure_de_fin = HeureDataUtils.getHeure_de_fin();
 
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<Heure_de_fin> adapter2 = new ArrayAdapter<Heure_de_fin>(this, android.R.layout.simple_spinner_item, heure_de_fin);
 
-        this.spinnerHeure_de_fin.setAdapter(adapter2);
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        this.spinnerHeure_de_fin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            this.spinnerHeure_de_fin.setAdapter(adapter2);
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                onItemSelectedHandler2(parent, view, position, id);
-            }
+            this.spinnerHeure_de_fin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    //onItemSelectedHandler2(parent, view, position, id);
+                }
 
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-    }
+                }
+            });
 
-    private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
-        Adapter adapter = adapterView.getAdapter();
-        Heure heure = (Heure) adapter.getItem(position);
+        }
+        else
+        {
+            this.spinnerHeure = (Spinner) findViewById(R.id.heure_de_debut);
+            Heure_12[] Heure12 = HeureDataUtils.getHeure_12();
 
-        Toast.makeText(getApplicationContext(), "Heure de début selectionnée: " + heure.getFullHeure() ,Toast.LENGTH_SHORT).show();
-    }
+            ArrayAdapter<Heure_12> adapter = new ArrayAdapter<Heure_12>(this,android.R.layout.simple_spinner_item,Heure12);
 
-    private void onItemSelectedHandler2(AdapterView<?> adapterView, View view, int position, long id) {
-        Adapter adapter = adapterView.getAdapter();
-        Heure_de_fin heure_de_fin = (Heure_de_fin) adapter.getItem(position);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Toast.makeText(getApplicationContext(), "Heure de fin selectionnée: " + heure_de_fin.getFullHeure_de_fin() ,Toast.LENGTH_SHORT).show();
-    }
+            this.spinnerHeure.setAdapter(adapter);
+
+            this.spinnerHeure.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    onItemSelectedHandler12h(parent, view, position, id);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            this.spinnerHeure_de_fin = (Spinner) findViewById(R.id.heure_de_fin);
+            Heure_de_fin_12[] Heure_de_fin_12 = HeureDataUtils.getHeure_de_fin_12();
+
+            ArrayAdapter<Heure_de_fin_12> adapter2 = new ArrayAdapter<Heure_de_fin_12>(this,android.R.layout.simple_spinner_item,Heure_de_fin_12);
+
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            this.spinnerHeure_de_fin.setAdapter(adapter2);
+
+            this.spinnerHeure_de_fin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    //onItemSelectedHandler2(parent, view, position, id);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+        }
+        }
+
+
+
+        private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id)
+        {
+            Adapter adapter = adapterView.getAdapter();
+            Heure heure = (Heure) adapter.getItem(position);
+
+            Toast.makeText(getApplicationContext(), "Heure de début selectionnée: " + heure.getFullHeure() ,Toast.LENGTH_SHORT).show();
+        }
+
+        private void onItemSelectedHandler12h(AdapterView<?> adapterView, View view, int position, long id)
+        {
+            Adapter adapter = adapterView.getAdapter();
+            Heure_12 heure_12 = (Heure_12) adapter.getItem(position);
+
+            Toast.makeText(getApplicationContext(), "Heure de début selectionnée: " + heure_12.getFullHeure_12() ,Toast.LENGTH_SHORT).show();
+        }
+
+        private void onItemSelectedHandler2(AdapterView<?> adapterView, View view, int position, long id)
+        {
+            Adapter adapter = adapterView.getAdapter();
+            Heure_de_fin heure_de_fin = (Heure_de_fin) adapter.getItem(position);
+
+            Toast.makeText(getApplicationContext(), "Heure de fin selectionnée: " + heure_de_fin.getFullHeure_de_fin() ,Toast.LENGTH_SHORT).show();
+        }
+
+        private void onItemSelectedHandler2_12h(AdapterView<?> adapterView, View view, int position, long id)
+        {
+            Adapter adapter = adapterView.getAdapter();
+            Heure_de_fin_12 heure_de_fin_12 = (Heure_de_fin_12) adapter.getItem(position);
+
+            Toast.makeText(getApplicationContext(), "Heure de fin selectionnée: " + heure_de_fin_12.getFullHeure_de_fin_12() ,Toast.LENGTH_SHORT).show();
+        }
 
 
     public void parametres(View view){
