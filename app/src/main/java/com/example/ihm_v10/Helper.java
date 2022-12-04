@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Helper extends SQLiteOpenHelper {
+    private SQLiteDatabase db;
 
     public Helper(@Nullable Context context) {
         super(context, "salle_libre", null, 1);
@@ -62,11 +66,39 @@ public class Helper extends SQLiteOpenHelper {
         return c;
     }
 
+
+    public List<Salle_disponible> getAllSalle2(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Salle_disponible> salle = new ArrayList<Salle_disponible>();
+        Cursor c = db.rawQuery("SELECT * FROM salle_disponible", null);
+        if(c.moveToFirst()){
+            do {
+                Salle_disponible s = new Salle_disponible(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3));
+                salle.add(s);
+            } while(c.moveToNext());
+        }
+        return salle;
+    }
+
     public Salle_disponible getOneSalle(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query("salle_disponible", new String[]{"_id", "numero", "heure", "heure2"}, "_id=?", new String[]{String.valueOf(id)}, null, null, null);
-        c.moveToFirst();
-        Salle_disponible s = new Salle_disponible(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3));
-        return s;
+        Cursor c = db.query("salle_disponible", new String[]{"_id", "numero", "heure", "heure2"},
+                "_id=?", new String[]{String.valueOf(id)}, null, null, null);
+        if (c != null)
+            c.moveToFirst();
+            Salle_disponible s = new Salle_disponible(c.getInt(0), c.getString(1), c.getDouble(2), c.getDouble(3));
+            return s;
+    }
+
+    public void opened(){
+        db = this.getWritableDatabase();
+    }
+
+    public void close(){
+        db.close();
+    }
+
+    public SQLiteDatabase getDb(){
+        return db;
     }
 }

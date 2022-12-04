@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
 
 public class TableActivity extends AppCompatActivity {
 
@@ -173,4 +176,22 @@ public class TableActivity extends AppCompatActivity {
         Intent bouton_back = new Intent(this, MainActivity.class);
         startActivity(bouton_back);
     }
+    //....................................Affichage des salles libres
+    public void récuperation(){
+
+    }
+    //Creation d'une instance de la classe Helper
+    Helper bddsalle = new Helper(this);
+    //bddsalle.opened();
+
+    //récuperation du ListView pour chaque epi présent dans l'IHM
+    ListView lv1 = (ListView) findViewById(R.id.epi1_liste);
+    ListView lv2 = (ListView) findViewById(R.id.epi2_liste);
+    ListView lv3 = (ListView) findViewById(R.id.epi3_liste);
+    ListView lv4 = (ListView) findViewById(R.id.epi4_liste);
+    ListView lv5 = (ListView) findViewById(R.id.epi5_liste);
+    ListView lv6 = (ListView) findViewById(R.id.epi6_liste);
+
+    ArrayList list1 = new ArrayList<String>();
+    //list1 = null; //a completer
 }
