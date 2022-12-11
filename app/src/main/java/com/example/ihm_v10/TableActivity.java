@@ -3,13 +3,16 @@ package com.example.ihm_v10;
 import static com.example.ihm_v10.SettingsActivity.getVarHeure;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.security.keystore.StrongBoxUnavailableException;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,15 +24,29 @@ public class TableActivity extends AppCompatActivity {
 
     private Spinner spinnerHeure;
     private Spinner spinnerHeure_de_fin;
-
+    Button epi1;
+    Helper h = new Helper(TableActivity.this);
+    ListView epi1_liste;
     boolean FormatHeure;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
-
         FormatHeure = getVarHeure();
+        epi1 = findViewById(R.id.epi1);
+        epi1_liste = findViewById(R.id.epi1_liste);
+
+        epi1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Cursor c =h.getAllSalle();
+                SimpleCursorAdapter adapter = new SimpleCursorAdapter(TableActivity.this, R.layout.item, c,
+                        new String[]{c.getColumnName(0), c.getColumnName(1), c.getColumnName(2), c.getColumnName(3)},
+                        new int[] {R.id.id,R.id.numerosalle, R.id.heuredebut, R.id.heurefin},1);
+                epi1_liste.setAdapter(adapter);
+            }
+        });
 
         if(FormatHeure == true)
         {
@@ -177,21 +194,21 @@ public class TableActivity extends AppCompatActivity {
         startActivity(bouton_back);
     }
     //....................................Affichage des salles libres
-    public void récuperation(){
+    //public void récuperation(){
 
-    }
+    //}
     //Creation d'une instance de la classe Helper
-    Helper bddsalle = new Helper(this);
-    //bddsalle.opened();
+    //Helper bddsalle = new Helper(this);
+    //bddsalle.onOpen();
 
     //récuperation du ListView pour chaque epi présent dans l'IHM
-    ListView lv1 = (ListView) findViewById(R.id.epi1_liste);
+    /*ListView lv1 = (ListView) findViewById(R.id.epi1_liste);
     ListView lv2 = (ListView) findViewById(R.id.epi2_liste);
     ListView lv3 = (ListView) findViewById(R.id.epi3_liste);
     ListView lv4 = (ListView) findViewById(R.id.epi4_liste);
     ListView lv5 = (ListView) findViewById(R.id.epi5_liste);
-    ListView lv6 = (ListView) findViewById(R.id.epi6_liste);
+    ListView lv6 = (ListView) findViewById(R.id.epi6_liste);*/
 
-    ArrayList list1 = new ArrayList<String>();
+    //ArrayList list1 = new ArrayList<String>();
     //list1 = null; //a completer
 }

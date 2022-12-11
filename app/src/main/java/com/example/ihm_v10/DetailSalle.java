@@ -31,6 +31,7 @@ public class DetailSalle extends AppCompatActivity {
         Salle_disponible s = h.getOneSalle(Integer.parseInt(id));
         numero.setText(s.getNumero());
         heure.setText(String.valueOf(s.getHeure()));
+        heure2.setText(String.valueOf(s.getHeure2()));
 
         mod.setOnClickListener(new View.OnClickListener() {
             @Override

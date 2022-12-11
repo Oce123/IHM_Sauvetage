@@ -31,6 +31,12 @@ public class Helper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /*@Override
+    public void onOpen(SQLiteDatabase db) {
+        db = this.getWritableDatabase();
+        super.onOpen(db);
+    }*/
+
     //insertion de nos données dans la base de données
     public void insertSalle(Salle_disponible s) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -90,9 +96,6 @@ public class Helper extends SQLiteOpenHelper {
             return s;
     }
 
-    public void opened(){
-        db = this.getWritableDatabase();
-    }
 
     public void close(){
         db.close();
