@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+//class permettant d'afficher les salles disponibles sous format tableau
 public class TableActivity extends AppCompatActivity {
 
     private Spinner spinnerHeure;
@@ -29,6 +30,7 @@ public class TableActivity extends AppCompatActivity {
     ListView epi1_liste;
     boolean FormatHeure;
 
+    //appelé à la création de l'activité, sert d'initialisation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

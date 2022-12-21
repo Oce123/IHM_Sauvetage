@@ -19,6 +19,8 @@ import android.widget.TextView;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+//class main de notre projet où l'on crée les salles occupé pour la base de données
+//en parallèle, essais de récupération de la base de donnée de la planif via http
 public class MainActivity extends AppCompatActivity {
 
     EditText numero, heure, heure2;
@@ -26,28 +28,29 @@ public class MainActivity extends AppCompatActivity {
 
     Helper h = new Helper(MainActivity.this);
 
+    //permission internet
     public static final int PERM_COMPLETED_STORAGE_ACCESS = 1;
     public static final int WRITE_FILE_REQUEST_CODE = 43;
     //MainFragment mainFragment;
     public static String id = "test_channel_01";
-
 
     private Spinner spinnerheure;
 
     TextView logger;
     String TAG = "MainFragment";
 
+    //appelé à la création de l'activité, sert d'initialisation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         numero = findViewById(R.id.numero);
         heure = findViewById(R.id.heure);
         heure2 = findViewById(R.id.heure_fin);
         b = findViewById(R.id.ajouter);
 
+        //interaction avec notre bouton pour ajouter une nouvelle salle a la base de donnée
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,19 +78,19 @@ public class MainActivity extends AppCompatActivity {
     //       android.R.layout.simple_list_item_1, values);
     //setListAdapter(adapter);
 
-
+    //redirection de notre bouton
     public void redirection(View view) {
         Intent redirect = new Intent(this, TableActivity.class);
         startActivity(redirect);
     }
 
+    //redirection de notre bouton
     public void liste_salle(View view){
         Intent bouton_salle = new Intent(this, ListeSalle.class);
         startActivity(bouton_salle);
     }
 
-
-
+    //a completer
     private void createFile(String mimeType, String fileName) {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
 
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, MainActivity.WRITE_FILE_REQUEST_CODE);
     }
 
-
+    //a completer
     public void downloadFile() {
         URL url = null;
         String file = "";
@@ -132,9 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    //a completer
     public void CheckPerm() {
         if ((ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) ||
                 (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
