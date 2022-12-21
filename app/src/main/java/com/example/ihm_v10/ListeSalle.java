@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-//class qui répoertorie les salles créées dans la base de données
+//classe qui répertorie les salles créées dans la base de données
 public class ListeSalle extends AppCompatActivity {
 
     ListView ls;
@@ -43,9 +43,6 @@ public class ListeSalle extends AppCompatActivity {
                 startActivity(x);
             }
         });
-
-
-
     }
 
     //redirection de notre bouton

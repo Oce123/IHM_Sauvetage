@@ -1,7 +1,9 @@
 package com.example.ihm_v10;
 
+//classe servant de répertoire pour l'ensemble des horaires utilisés dans les spinners
 public class HeureDataUtils {
 
+    //répertoire des horaires de début, sous forme de tableau
     public static Heure[] getHeure()  {
         Heure h1 = new Heure(8, "00");
         Heure h2 = new Heure(9, "00");
@@ -19,6 +21,7 @@ public class HeureDataUtils {
         return new Heure[] {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12};
     }
 
+    //répertoire des horaires de fin, sous forme de tableau
     public static Heure_de_fin[] getHeure_de_fin()  {
         Heure_de_fin h1 = new Heure_de_fin(8, "00");
         Heure_de_fin h2 = new Heure_de_fin(9, "00");
@@ -36,6 +39,7 @@ public class HeureDataUtils {
         return new Heure_de_fin[] {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12};
     }
 
+    //répertoire des horaires de début en format 12h, sous forme de tableau
     public static Heure_12[] getHeure_12()  {
         Heure_12 h1 = new Heure_12(8, "00", "AM");
         Heure_12 h2 = new Heure_12(9, "00", "AM");
@@ -53,6 +57,7 @@ public class HeureDataUtils {
         return new Heure_12[] {h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12};
     }
 
+    //répertoire des horaires de fin en format 12h, sous forme de tableau
     public static Heure_de_fin_12[] getHeure_de_fin_12()  {
         Heure_de_fin_12 h1 = new Heure_de_fin_12(8, "00", "AM");
         Heure_de_fin_12 h2 = new Heure_de_fin_12(9, "00", "AM");

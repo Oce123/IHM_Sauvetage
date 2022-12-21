@@ -4,9 +4,10 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//class permettant l'affichage sous format 3D, pas encore traité
+//classe permettant l'affichage sous format 3D, pas encore traité
 public class SchemesActivity extends AppCompatActivity {
 
+    //appelé à la création de l'activité, sert d'initialisation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

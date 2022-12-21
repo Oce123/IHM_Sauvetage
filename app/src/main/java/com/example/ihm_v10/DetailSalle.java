@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//classe permettant de voir en détail la salle sélectionné et de la modifier/supprimer
+//classe permettant de voir en détail la salle sélectionnée et de la modifier/supprimer
 public class DetailSalle extends AppCompatActivity {
 
     EditText numero, heure, heure2;
@@ -29,7 +29,7 @@ public class DetailSalle extends AppCompatActivity {
         sup = findViewById(R.id.sup);
         id = getIntent().getStringExtra("id");
 
-        //récupère la salle sélectionné ainsi que ses paramètres rentrés (numéro et heure)
+        //récupère la salle sélectionnée ainsi que ses paramètres rentrés (numéro et heures)
         Salle_disponible s = h.getOneSalle(Integer.parseInt(id));
         numero.setText(s.getNumero());
         heure.setText(String.valueOf(s.getHeure()));
@@ -47,7 +47,7 @@ public class DetailSalle extends AppCompatActivity {
             }
         });
 
-        //intéraction avec le bouton supprimer
+        //interaction avec le bouton supprimer
         sup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +58,7 @@ public class DetailSalle extends AppCompatActivity {
         });
     }
 
+    //redirection du bouton
     public void retour(View view) {
         Intent bouton_retour = new Intent(this, ListeSalle.class);
         startActivity(bouton_retour);

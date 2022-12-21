@@ -19,13 +19,13 @@ public class Helper extends SQLiteOpenHelper {
         super(context, "salle_libre", null, 1);
     }
 
-    //création de la base de donnée
+    //création de la base de données
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE salle_disponible(_id INTEGER PRIMARY KEY, numero TEXT,heure REAL, heure2 REAL)");
     }
 
-    //permet de mettre a jour la base de donnée en cas de changement
+    //permet de mettre a jour la base de données en cas de changement
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS salle_disponible");
@@ -50,7 +50,7 @@ public class Helper extends SQLiteOpenHelper {
         db.close();
     }
 
-    //mettre a jour la base de données
+    //mis a jour de la base de données
     public void updtaeSalle(Salle_disponible s) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -62,20 +62,21 @@ public class Helper extends SQLiteOpenHelper {
         db.close();
     }
 
-    //suppression de salle
+    //suppression de salle dans la base de données
     public void deleteSalle(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("salle_disponible", " _id=?", new String[]{String.valueOf(id)});
         db.close();
     }
 
-    //2 méthodes différentes de 2 types différents pour retouorner les salles disponibles
+    //2 méthodes différentes de 2 types différents pour retourner les salles disponibles
+    //1ere méthode
     public Cursor getAllSalle() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM salle_disponible", null);
         return c;
     }
-
+    //2nde méthode
     public List<Salle_disponible> getAllSalle2(){
         SQLiteDatabase db = this.getWritableDatabase();
         List<Salle_disponible> salle = new ArrayList<Salle_disponible>();
@@ -89,7 +90,7 @@ public class Helper extends SQLiteOpenHelper {
         return salle;
     }
 
-    //méthode pour nous retourner une salle
+    //méthode pour nous retourner une seule salle
     public Salle_disponible getOneSalle(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.query("salle_disponible", new String[]{"_id", "numero", "heure", "heure2"},
@@ -100,11 +101,12 @@ public class Helper extends SQLiteOpenHelper {
             return s;
     }
 
-
+    //méthode pour fermer la base de données
     public void close(){
         db.close();
     }
 
+    //getter de la base de données, retourne la base de données
     public SQLiteDatabase getDb(){
         return db;
     }
