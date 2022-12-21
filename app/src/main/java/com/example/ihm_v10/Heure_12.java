@@ -1,5 +1,6 @@
 package com.example.ihm_v10;
 
+//Classe permettant de définir les paramètres des heures qui seront utilisés dans les spinners
 public class Heure_12 {
 
     private int Heure_12;

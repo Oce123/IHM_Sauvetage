@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 
+//class permettant de gérer nos paramètres ainsi que leurs comportements
 public class SettingsActivity extends AppCompatActivity {
 
     SwitchCompat Sw24h;
@@ -22,6 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
         return varHeure;
     }
 
+    //appelé à la création de l'activité, sert d'initialisation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +36,19 @@ public class SettingsActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences("Save",MODE_PRIVATE); // Groupe Save
 
+        //nos valeurs par défaut
         Sw24h.setChecked(sp.getBoolean("12h24",false));
         SwSombre.setChecked(sp.getBoolean("Dark",false));
         Sw3D.setChecked(sp.getBoolean("2D3D",false));
         SwSalle.setChecked(sp.getBoolean("Salle",false));
 
+        //interaction avec le bouton 24h/12h
         Sw24h.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Sw24h.isChecked())
                 {
-                    // Bouton Switch ON
+                    // Bouton Switch ON, on affiche en format 24h
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("12h24",true); // On mets true à l'étiquette value du groupe save
                     editor.apply();
@@ -53,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    // Bouton Switch OFF
+                    // Bouton Switch OFF, on affiche en format 12h
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("12h24",false); // On mets false à l'étiquette value du groupe save
                     editor.apply();
@@ -62,12 +66,14 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //interaction avec le bouton pour le mode sombre
         SwSombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SwSombre.isChecked())
                 {
-                    // Bouton Switch ON
+                    // Bouton Switch ON, on affiche l'application en mode sombre
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("Dark",true); // On mets true à l'étiquette value du groupe save
                     editor.apply();
@@ -77,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    // Bouton Switch OFF
+                    // Bouton Switch OFF, on n'affiche pas l'application en mode sombre
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("Dark",false); // On mets false à l'étiquette value du groupe save
                     editor.apply();
@@ -86,12 +92,14 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //interaction avec le bouton pour la vue 3D/2D
         Sw3D.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Sw3D.isChecked())
                 {
-                    // Bouton Switch ON
+                    // Bouton Switch ON, on affiche la vue 3D
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("2D3D",true); // On mets true à l'étiquette value du groupe save
                     editor.apply();
@@ -100,7 +108,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    // Bouton Switch OFF
+                    // Bouton Switch OFF, on affiche la vue 2D
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("2D3D",false); // On mets false à l'étiquette value du groupe save
                     editor.apply();
@@ -108,12 +116,14 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //interaction avec le boouton pour afficher uniquement les salles disponibles
         SwSalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (SwSalle.isChecked())
                 {
-                    // Bouton Switch ON
+                    // Bouton Switch ON, on affiche uniquement les salles libres
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("Salle",true); // On mets true à l'étiquette value du groupe save
                     editor.apply();
@@ -122,7 +132,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    // Bouton Switch OFF
+                    // Bouton Switch OFF, on affiche tout
                     SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
                     editor.putBoolean("Salle",false); // On mets false à l'étiquette value du groupe save
                     editor.apply();
@@ -132,6 +142,7 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    //redirection du bouton
     public void retour(View view){
         Intent bouton_retour = new Intent(this, TableActivity.class);
         startActivity(bouton_retour);

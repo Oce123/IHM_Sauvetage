@@ -1,5 +1,6 @@
 package com.example.ihm_v10;
 
+//class permettant de définir les paramètres de nos salles disponibles
 public class Salle_disponible {
     int id;
     String numero;

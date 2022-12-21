@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+//Classe nous permettant de créer la base de données
 public class Helper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
 
@@ -49,6 +50,7 @@ public class Helper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //mettre a jour la base de données
     public void updtaeSalle(Salle_disponible s) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -60,18 +62,19 @@ public class Helper extends SQLiteOpenHelper {
         db.close();
     }
 
+    //suppression de salle
     public void deleteSalle(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("salle_disponible", " _id=?", new String[]{String.valueOf(id)});
         db.close();
     }
 
+    //2 méthodes différentes de 2 types différents pour retouorner les salles disponibles
     public Cursor getAllSalle() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM salle_disponible", null);
         return c;
     }
-
 
     public List<Salle_disponible> getAllSalle2(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -86,6 +89,7 @@ public class Helper extends SQLiteOpenHelper {
         return salle;
     }
 
+    //méthode pour nous retourner une salle
     public Salle_disponible getOneSalle(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.query("salle_disponible", new String[]{"_id", "numero", "heure", "heure2"},

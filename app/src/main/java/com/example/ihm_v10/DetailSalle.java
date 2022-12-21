@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+//classe permettant de voir en détail la salle sélectionné et de la modifier/supprimer
 public class DetailSalle extends AppCompatActivity {
 
     EditText numero, heure, heure2;
@@ -15,7 +16,7 @@ public class DetailSalle extends AppCompatActivity {
     String id;
     Helper h = new Helper(DetailSalle.this);
 
-
+    //appelé à la création de l'activité, sert d'initialisation
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,22 +29,25 @@ public class DetailSalle extends AppCompatActivity {
         sup = findViewById(R.id.sup);
         id = getIntent().getStringExtra("id");
 
+        //récupère la salle sélectionné ainsi que ses paramètres rentrés (numéro et heure)
         Salle_disponible s = h.getOneSalle(Integer.parseInt(id));
         numero.setText(s.getNumero());
         heure.setText(String.valueOf(s.getHeure()));
         heure2.setText(String.valueOf(s.getHeure2()));
 
+        //interaction avec le bouton modifier
         mod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Salle_disponible sd = new Salle_disponible(Integer.parseInt(id), numero.getText().toString(), Double.parseDouble(heure.getText().toString()), Double.parseDouble(heure2.getText().toString()));
-
+                Salle_disponible sd = new Salle_disponible(Integer.parseInt(id), numero.getText().toString(),
+                        Double.parseDouble(heure.getText().toString()), Double.parseDouble(heure2.getText().toString()));
                 h.updtaeSalle(sd);
                 Intent i = new Intent(DetailSalle.this, ListeSalle.class);
                 startActivity(i);
             }
         });
 
+        //intéraction avec le bouton supprimer
         sup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
