@@ -36,32 +36,32 @@ public class SettingsActivity extends AppCompatActivity {
         SwSalle = findViewById(R.id.affichage_salle);
 
         //stocke une valeur à une clé
-        SharedPreferences sp = getSharedPreferences("Save",MODE_PRIVATE); //group save
+        SharedPreferences sp = getSharedPreferences("Save",MODE_PRIVATE); //groupe save pour stocker les différentes valeurs des clés
 
         //valeurs par défaut de l'application
-        Sw24h.setChecked(sp.getBoolean("12h24",false));
-        SwSombre.setChecked(sp.getBoolean("Dark",false));
-        Sw3D.setChecked(sp.getBoolean("2D3D",false));
-        SwSalle.setChecked(sp.getBoolean("Salle",false));
+        Sw24h.setChecked(sp.getBoolean("12h24",false)); // valeur du bouton 24h dans la clé 12h24
+        SwSombre.setChecked(sp.getBoolean("Dark",false)); // Valeur du bouton du dark mode dans la clé Dark
+        Sw3D.setChecked(sp.getBoolean("2D3D",false)); // Valeur du bouton de la vue 3D dans la clé 2D3D
+        SwSalle.setChecked(sp.getBoolean("Salle",false)); // Valeur du bouton salle dans la clé Salle
 
         //interaction avec le bouton 24h/12h
         Sw24h.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Sw24h.isChecked())
+                if (Sw24h.isChecked()) // Si le bouton est activé
                 {
                     // Bouton Switch ON, on affiche en format 24h
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
-                    editor.putBoolean("12h24",true); // On met true à l'étiquette value du groupe save
-                    editor.apply();
-                    varHeure=true;
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
+                    editor.putBoolean("12h24",true); // On met true à la clé value du groupe save
+                    editor.apply(); // application des modifitcations sur la clé
+                    varHeure=true; // passage à l'état true sur la variable
                     Sw24h.setChecked(true);
                 }
-                else
+                else // Si le bouton est pas activé
                 {
                     // Bouton Switch OFF, on affiche en format 12h
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
-                    editor.putBoolean("12h24",false); // On met false à l'étiquette value du groupe save
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
+                    editor.putBoolean("12h24",false); // On met false à la clé value du groupe save
                     editor.apply();
                     varHeure=false;
                     Sw24h.setChecked(false);
@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (SwSombre.isChecked())
                 {
                     // Bouton Switch ON, on affiche l'application en mode sombre
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
                     editor.putBoolean("Dark",true); // On met true à l'étiquette value du groupe save
                     editor.apply();
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); // Utilise en permanence les ressources night
@@ -86,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
                 else
                 {
                     // Bouton Switch OFF, on n'affiche pas l'application en mode sombre
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
                     editor.putBoolean("Dark",false); // On met false à l'étiquette value du groupe save
                     editor.apply();
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Utilise en permanence les ressources normals
@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (Sw3D.isChecked())
                 {
                     // Bouton Switch ON, on affiche la vue 3D
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
                     editor.putBoolean("2D3D",true); // On met true à l'étiquette value du groupe save
                     editor.apply();
                     Sw3D.setChecked(true);
@@ -111,7 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
                 else
                 {
                     // Bouton Switch OFF, on affiche la vue 2D
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
                     editor.putBoolean("2D3D",false); // On met false à l'étiquette value du groupe save
                     editor.apply();
                     Sw3D.setChecked(false);
@@ -126,7 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (SwSalle.isChecked())
                 {
                     // Bouton Switch ON, on affiche uniquement les salles libres
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
                     editor.putBoolean("Salle",true); // On met true à l'étiquette value du groupe save
                     editor.apply();
                     SwSalle.setChecked(true);
@@ -135,7 +135,7 @@ public class SettingsActivity extends AppCompatActivity {
                 else
                 {
                     // Bouton Switch OFF, on affiche tout
-                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Save",MODE_PRIVATE).edit(); // On crée un editeur du groupe "save"
                     editor.putBoolean("Salle",false); // On met false à l'étiquette value du groupe save
                     editor.apply();
                     Sw3D.setChecked(false);

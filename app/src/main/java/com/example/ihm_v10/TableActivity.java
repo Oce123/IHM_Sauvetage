@@ -52,8 +52,9 @@ public class TableActivity extends AppCompatActivity {
         });
         //un seul épi a été traité a des fins de test, il s'agit de traiter dans le futur les autres épis
 
-        if(FormatHeure == true)
+        if(FormatHeure == true) // Test pour savoir s'il faut afficher en 12 ou 24h
         {
+            //Utilisation du tableaux avec les heures en 24h de début + utilisation dans le spinner
             this.spinnerHeure = (Spinner) findViewById(R.id.heure_de_debut);
             Heure[] heure = HeureDataUtils.getHeure();
             ArrayAdapter<Heure> adapter = new ArrayAdapter<Heure>(this,android.R.layout.simple_spinner_item,heure);
@@ -71,6 +72,7 @@ public class TableActivity extends AppCompatActivity {
                 }
             });
 
+            //Utilisation du tableaux avec les heures en 24h de fin + utilisation dans le spinner
             this.spinnerHeure_de_fin = (Spinner) findViewById(R.id.heure_de_fin);
             Heure_de_fin[] heure_de_fin = HeureDataUtils.getHeure_de_fin();
             ArrayAdapter<Heure_de_fin> adapter2 = new ArrayAdapter<Heure_de_fin>(this, android.R.layout.simple_spinner_item, heure_de_fin);
@@ -88,6 +90,7 @@ public class TableActivity extends AppCompatActivity {
                 }
             });
         }
+        // Utilisation de la même structure précédente mais pour les heures en 12h
         else {
             this.spinnerHeure = (Spinner) findViewById(R.id.heure_de_debut);
             Heure_12[] Heure12 = HeureDataUtils.getHeure_12();
@@ -123,7 +126,7 @@ public class TableActivity extends AppCompatActivity {
                 }
             });
         }}
-
+        // Message toast pour indiqué les paramètres utilisés
         private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
             Adapter adapter = adapterView.getAdapter();
             Heure heure = (Heure) adapter.getItem(position);
